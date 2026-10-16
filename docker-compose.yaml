@@ -1,0 +1,13 @@
+services:
+  whisper:
+    image: whisper-transcription-service:${APP_VERSION:-dev}
+    build: .
+    container_name: whisper-transcription-service
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      WHISPER_MODEL_PATH: /models/large-v3-turbo.pt
+      WHISPER_LANGUAGE: Italian
+    volumes:
+      - /Users/amarildo/.cache/whisper:/models:ro
+    restart: unless-stopped
